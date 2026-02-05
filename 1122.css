@@ -123,6 +123,9 @@ span.class4 {color: rgb(230, 132, 192); font-family: Avenir Next; font-weight: b
     flex: 35%;
     padding: 5px;
     margin-left: 00px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
 }
 .column2 {
