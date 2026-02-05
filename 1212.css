@@ -1,0 +1,147 @@
+
+h4{color: black; font-size: 15pt; width: fit-content; font-family: Avenir; margin: 35px;}
+h2{color: black; font-family: Baloo; font-size: 20pt; margin-left:30px}
+p{font-family: Avenir Next; font-size: 16px; margin-right:350px;}
+    
+.cena {
+    color: black; 
+    font-family: Baloo; 
+    font-size: 18pt; 
+    margin-left:30px
+}
+
+.header {
+  padding: 10px;
+  text-align: center;
+  background-color:bisque;
+  color:cornflowerblue;
+  font-size: 20px;
+  font-family: Hannotate TC ;
+}
+
+.myimage {
+  margin: 5px;
+  float: right;
+  width: 40px; height: 40px;
+  border: 3px solid #ff9999;
+  border-radius: 20%;
+}
+
+.cece {
+  color: black; 
+  font-size: 15pt; 
+  width: fit-content; 
+  font-family: Avenir; 
+  margin:0px;
+  }
+
+.cena1 {
+  float: left;
+  margin-left: 45px;
+}
+
+span.class2 {color: darkseagreen; font-family: Avenir Next; font-weight: bold; font-size: 14pt;}
+span.class1 {color: rgb(42, 99, 206);font-family: Avenir Next; font-weight: bold; font-size: 14pt;}
+span.class3 {color: aquamarine; font-family: Avenir Next; font-weight: bold; font-size: 14pt;}
+span.class4 {color: #ff1865; font-family: Avenir Next; font-weight: bold; font-size: 14pt;}
+
+
+ul.a {
+  list-style-type: circle;
+  margin: 30px
+}
+
+* {box-sizing:border-box}
+
+.slideshow-container {
+    max-width: 700px;
+    position: relative;
+    margin: auto;
+}
+  
+  
+.mySlides {
+    display: none;
+}
+  
+  
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: 40px;
+    margin-top: -22px;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+  
+  
+.next {
+    right:0px;
+    border-radius: 3px 0 0 3px;
+}
+  
+  
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+  
+  
+.text {
+    color: #f2f2f2;
+    font-size: 18px;
+    padding: 8px 12px;
+    position: absolute;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+    font-family: Avenir Next;
+}
+  
+  
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+  
+  
+.dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+  }
+  
+.active, .dot:hover {
+    background-color: #717171;
+}
+  
+  
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+  }
+  
+@-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }
+  
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+  }

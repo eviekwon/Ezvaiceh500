@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel= "stylesheet" href= "list.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+<style>
+  @import url(list.css);
+  @import url(1122.css);
+</style>
+<title> Our Travel Map </title>
+<style>
+  .map-card { padding: 24px; }
+  .map-header { text-align: center; margin-bottom: 16px; }
+  .map-header h2 { margin: 0 0 6px 0; }
+  .map-header p { margin: 0; color: var(--muted); }
+
+  .map-controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 18px 0 14px;
+  }
+
+  .map-controls input[type="text"] {
+    padding: 10px 14px;
+    min-width: 260px;
+    border: 1px solid #e6d7df;
+    border-radius: 999px;
+    font-size: 15px;
+  }
+
+  #map {
+    width: 100%;
+    height: 420px;
+    border-radius: 18px;
+    border: 1px solid #efe3e9;
+    box-shadow: 0 10px 24px rgba(47, 42, 44, 0.12);
+  }
+
+  .places {
+    margin-top: 18px;
+  }
+
+  .places h3 { margin: 0 0 10px 0; }
+
+  .place-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #f0e4ea;
+    margin-bottom: 8px;
+  }
+
+  .place-name {
+    cursor: pointer;
+  }
+
+  @media (max-width: 430px) {
+    .map-card { padding: 16px; }
+    #map { height: 320px; }
+    .map-controls { flex-direction: column; align-items: stretch; }
+    .map-controls input[type="text"] { min-width: 0; width: 100%; }
+  }
+
+</style>
+</head>
+
+<body>
+
+  <div class="header">
+    <h1> Our Travel Map 🌍  </h1>
+    <a href="Favourite.html"><img class="myimage" src="favourite.png" alt="homepage" ></a>
+    <a href="About us.html"><img class="myimage" src="relationship.png" alt="homepage" ></a>
+    <a href="adventure.html"><img class="myimage" src="home.png" alt="homepage"></a>
+    <br>
+    <Br>
+    </div>
+
+  <div class="page">
+    <div class="card map-card">
+      <div class="map-header">
+        <h2>Our Travel Map</h2>
+        <p>Click the map to add places. Drag pins to edit. Tap a name to rename.</p>
+      </div>
+      <div class="map-controls">
+        <input type="text" id="placeInput" placeholder="Search a place (e.g. Paris, Seoul)">
+        <button class="btn btn-primary" id="addPlaceBtn">Add place</button>
+        <button class="btn btn-ghost" id="clearAllBtn">Clear all</button>
+      </div>
+      <div id="map"></div>
+      <div class="places">
+        <h3>Places</h3>
+        <div id="placesList"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([20, 0], 2);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
+
+    let places = JSON.parse(localStorage.getItem('travelPlaces')) || [];
+    let markers = [];
+
+    function savePlaces() {
+      localStorage.setItem('travelPlaces', JSON.stringify(places));
+    }
+
+    function clearMarkers() {
+      markers.forEach(m => map.removeLayer(m));
+      markers = [];
+    }
+
+    const pinIcon = L.icon({
+      iconUrl: 'location.png',
+      iconSize: [30, 40],
+      iconAnchor: [15, 40],
+      popupAnchor: [0, -32]
+    });
+
+    function renderPlaces() {
+      clearMarkers();
+      const list = document.getElementById('placesList');
+      list.innerHTML = '';
+
+      places.forEach((place, index) => {
+        const marker = L.marker([place.lat, place.lng], { draggable: true, icon: pinIcon })
+          .addTo(map)
+          .bindPopup(place.name);
+
+        marker.on('dragend', (e) => {
+          const { lat, lng } = e.target.getLatLng();
+          places[index].lat = lat;
+          places[index].lng = lng;
+          savePlaces();
+        });
+
+        markers.push(marker);
+
+        const row = document.createElement('div');
+        row.className = 'place-item';
+        row.innerHTML = `
+          <div class="place-name" data-index="${index}">${place.name}</div>
+          <button class="btn btn-ghost" data-delete="${index}">Remove</button>
+        `;
+        list.appendChild(row);
+      });
+
+      if (places.length > 0) {
+        const bounds = L.latLngBounds(places.map(p => [p.lat, p.lng]));
+        map.fitBounds(bounds, { padding: [40, 40] });
+      }
+    }
+
+    function addPlace(place) {
+      places.push(place);
+      savePlaces();
+      renderPlaces();
+    }
+
+    document.getElementById('addPlaceBtn').addEventListener('click', async () => {
+      const input = document.getElementById('placeInput');
+      const query = input.value.trim();
+      if (!query) return;
+
+      try {
+        const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`);
+        const data = await res.json();
+        if (!data || !data[0]) {
+          alert('Place not found. Try a different name.');
+          return;
+        }
+        const place = {
+          name: query,
+          lat: parseFloat(data[0].lat),
+          lng: parseFloat(data[0].lon)
+        };
+        addPlace(place);
+        input.value = '';
+      } catch (err) {
+        alert('Could not search right now. Please try again.');
+      }
+    });
+
+    document.getElementById('clearAllBtn').addEventListener('click', () => {
+      if (!confirm('Remove all places?')) return;
+      places = [];
+      savePlaces();
+      renderPlaces();
+    });
+
+    document.getElementById('placesList').addEventListener('click', (e) => {
+      const deleteIndex = e.target.getAttribute('data-delete');
+      if (deleteIndex !== null) {
+        places.splice(parseInt(deleteIndex, 10), 1);
+        savePlaces();
+        renderPlaces();
+        return;
+      }
+      const nameEl = e.target.closest('.place-name');
+      if (nameEl) {
+        const idx = parseInt(nameEl.getAttribute('data-index'), 10);
+        const nextName = prompt('Edit place name:', places[idx].name);
+        if (nextName && nextName.trim()) {
+          places[idx].name = nextName.trim();
+          savePlaces();
+          renderPlaces();
+        }
+      }
+    });
+
+    map.on('click', (e) => {
+      const name = prompt('Name this place:');
+      if (!name || !name.trim()) return;
+      addPlace({ name: name.trim(), lat: e.latlng.lat, lng: e.latlng.lng });
+    });
+
+    renderPlaces();
+  </script>
+  <script src="gate.js"></script>
+</body>
+
+
+</html>

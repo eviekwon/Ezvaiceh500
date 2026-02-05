@@ -1,0 +1,34 @@
+
+
+.row1{
+  display: flex;
+  margin-left:50px;
+}
+
+.column2 {
+  flex: 80%;
+  padding: 3px;
+}
+
+.cena1 {
+  float: left;
+  margin-left: 45px;
+}
+
+ul.a {
+  list-style-type: circle;
+  margin: 30px
+}
+
+.myimage {
+  margin: 5px;
+  float: right;
+  width: 40px; height: 40px;
+  border: 3px solid #ff9999;
+  border-radius: 20%;
+}
+
+span.class6 {color: rgb(144, 185, 247); font-family: Avenir Next; font-weight: bold; font-size: 13pt;}
+span.class7 {color: rgb(46, 84, 134); font-family: Avenir Next; font-weight: bold; font-size: 14pt;}
+span.class8 {color: rgb(223, 161, 220); font-family: Avenir Next; font-weight: bold; font-size: 14pt;}
+  

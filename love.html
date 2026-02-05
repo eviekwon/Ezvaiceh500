@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="1122.css">
+  <title>Love Meter</title>
+  <style>
+    .meter-page {
+      min-height: calc(100vh - 120px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .meter-card {
+      width: min(720px, 92%);
+      padding: 28px 26px;
+      text-align: center;
+    }
+    .meter-title {
+      margin: 0 0 8px 0;
+    }
+    .meter-sub {
+      color: var(--muted);
+      margin: 0 0 22px 0;
+    }
+    .meter-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 46px;
+      margin: 10px 0 8px;
+      color: var(--accent-2);
+    }
+    .meter-message {
+      font-size: 18px;
+      color: var(--ink);
+      margin: 10px 0 20px;
+    }
+    .meter-slider {
+      width: 100%;
+      accent-color: #c08aa0;
+    }
+    .meter-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 430px) {
+      .meter-card { padding: 22px 18px; }
+      .meter-value { font-size: 36px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Love Meter 💖</h1>
+    <a href="Favourite.html"><img class="myimage" src="pin.png" alt="homepage" ></a>
+    <a href="About us.html"><img class="myimage" src="relationship.png" alt="homepage" ></a>
+    <a href="adventure.html"><img class="myimage" src="home.png" alt="homepage"></a>
+    <br>
+    <Br>
+  </div>
+
+  <div class="page meter-page">
+    <div class="card meter-card">
+      <h2 class="meter-title">How much do you love me?</h2>
+      <p class="meter-sub">Slide to set the love level.</p>
+      <input class="meter-slider" type="range" id="loveRange" min="0" max="100" value="50">
+      <div class="meter-value" id="loveValue">50%</div>
+      <div class="meter-message" id="loveMessage">Warm and cozy love.</div>
+      <div class="meter-actions">
+        <button class="btn btn-primary" id="maxLoveBtn">Max Love</button>
+        <button class="btn btn-ghost" id="resetLoveBtn">Reset</button>
+        <button class="btn btn-primary" id="goAdventureBtn" style="display:none;">Go to Adventure</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const range = document.getElementById('loveRange');
+    const valueEl = document.getElementById('loveValue');
+    const messageEl = document.getElementById('loveMessage');
+    const maxBtn = document.getElementById('maxLoveBtn');
+    const resetBtn = document.getElementById('resetLoveBtn');
+    const goAdventureBtn = document.getElementById('goAdventureBtn');
+
+    const messages = [
+      { min: 0, text: "죽을래?" },
+      { min: 20, text: "우린 그냥 친구지" },
+      { min: 40, text: "좋아는 하는데,, 음 사랑은?" },
+      { min: 60, text: "보면 좋고 웃음이 나" },
+      { min: 80, text: "계속 계속 보고싶어" },
+      { min: 95, text: "사랑해" }
+    ];
+
+    function updateLove(val) {
+      valueEl.textContent = `${val}%`;
+      const msg = [...messages].reverse().find(m => val >= m.min);
+      messageEl.textContent = msg ? msg.text : messages[0].text;
+      localStorage.setItem('loveMax', val === 100 ? 'true' : 'false');
+      if (val === 100) {
+        goAdventureBtn.style.display = 'inline-block';
+      } else {
+        goAdventureBtn.style.display = 'none';
+      }
+    }
+
+    range.addEventListener('input', (e) => {
+      updateLove(parseInt(e.target.value, 10));
+    });
+
+    maxBtn.addEventListener('click', () => {
+      range.value = 100;
+      updateLove(100);
+    });
+
+    resetBtn.addEventListener('click', () => {
+      range.value = 50;
+      updateLove(50);
+    });
+
+    goAdventureBtn.addEventListener('click', () => {
+      window.location.href = 'adventure.html';
+    });
+
+    if (localStorage.getItem('loveMax') === 'true') {
+      range.value = 100;
+    }
+    updateLove(parseInt(range.value, 10));
+
+    document.addEventListener('click', (e) => {
+      const target = e.target.closest('a');
+      if (!target) return;
+      if (localStorage.getItem('loveMax') === 'true') return;
+      e.preventDefault();
+      alert('Please reach Max Love 💖 first. Try again!');
+    }, true);
+  </script>
+</body>
+</html>

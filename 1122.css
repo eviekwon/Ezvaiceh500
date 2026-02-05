@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@300;400;600&display=swap');
+
+:root {
+  --bg-1: #faf6f8;
+  --bg-2: #f0ecef;
+  --ink: #2f2a2c;
+  --muted: #6e6469;
+  --accent: #c08aa0;
+  --accent-2: #9a6f88;
+  --card: #ffffffcc;
+  --shadow: 0 18px 40px rgba(47, 42, 44, 0.15);
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  color: var(--ink);
+  background: radial-gradient(1200px 600px at 20% 0%, #ffffff 0%, var(--bg-1) 40%, var(--bg-2) 100%);
+}
+
+h1, h2, h3 {
+  font-family: 'Fredoka', sans-serif;
+  color: var(--ink);
+  letter-spacing: 0.5px;
+}
+
+a {
+  color: var(--accent-2);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+button, .btn {
+  border: none;
+  border-radius: 999px;
+  padding: 12px 22px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #d9a6b7, #b786a0);
+  color: #fff;
+  box-shadow: 0 10px 24px rgba(183, 134, 160, 0.35);
+}
+
+.btn-ghost {
+  background: #ffffff;
+  color: var(--accent-2);
+  border: 1px solid #e4d8dd;
+}
+
+button:hover, .btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(47, 42, 44, 0.2);
+}
+
+.card {
+  background: var(--card);
+  backdrop-filter: blur(6px);
+  border: 1px solid #efe3e9;
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+}
+
+.page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 16px 40px;
+}
+
+h4.hyesoo {margin-top: 20px;;
+  margin-left: 40px; font-family: Avenir Next; font-weight:Regular; font-size:17px; color: yellow; background-color: pink; padding:50px; margin-right: 300px; }
+
+
+p{font-family: Avenir Next; font-size: 16px; margin-left: 40px; margin-right:350px;}
+
+.header {
+  padding: 16px 12px;
+  text-align: center;
+  background: #ffffffd9;
+  color: var(--ink);
+  font-size: 20px;
+  font-family: 'Playfair Display', serif;
+  border-bottom: 1px solid #f0e4ea;
+}
+span.class2 {color: lightcoral; font-family: Avenir Next; font-weight: bold; font-size: 13pt;}
+span.class3 {color: rgb(199, 65, 65); font-family: Avenir Next; font-weight: bold; font-size: 14pt;}
+span.class4 {color: rgb(230, 132, 192); font-family: Avenir Next; font-weight: bold; font-size: 14pt;}
+
+.cena1 {
+  float: left;
+  margin-left: 50px;
+}
+
+.myimage {
+  margin: 5px;
+  float: right;
+  width: 40px; height: 40px;
+  background: #c08aa0;
+  border-radius: 10px;
+  padding: 6px;
+  box-shadow: 0 6px 14px rgba(47, 42, 44, 0.15);
+}
+
+.row
+{
+    display: flex;
+    margin-left:0;
+    gap: 24px;
+}
+
+.column1 {
+    flex: 35%;
+    padding: 5px;
+    margin-left: 00px;
+
+}
+.column2 {
+    flex: 35%;
+    padding: 5px;
+    margin-left: 800px;
+
+}
+
+.button {
+
+}
+
+*{box-sizing: border-box;}
+
+    .img-container {
+        margin: 35px;
+        float:left;
+        width: 10%;
+        height: 20%;
+        padding: 0px;
+    }
+
+    .content {
+        width: 75%;
+    }
+
+
+    .container {
+        position: relative;
+        width: 50%;
+        max-width: 300px;
+
+    }
+
+    .image {
+        margin-left:35px;
+        display: block;
+        width: 70%;
+        height: auto;
+    }
+
+    .overlay {
+        margin-left:35px;
+        position: absolute;
+        bottom: 0;
+        background: rgb(0, 0, 0);
+        background: rgba(0, 0, 0, 0.5);
+        color: #f1f1f1;
+        width: 110%;
+        transition: .5s ease;
+        opacity:0;
+        color: white;
+        font-size: 15px;
+        font-family: Avenir Next;
+        padding: 13px;
+        text-align: center;
+    }
+
+    .container:hover .overlay {
+        opacity: 0.8;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0 4px;
+      }
+
+      /* Create four equal columns that sits next to each other */
+      .column {
+        flex: 25%;
+        max-width: 25%;
+        padding: 0 4px;
+      }
+
+      .column img {
+        margin-top: 8px;
+        vertical-align: middle;
+        width: 100%;
+      }
+
+      /* Responsive layout - makes a two column-layout instead of four columns */
+      @media screen and (max-width: 800px) {
+        .column {
+          flex: 50%;
+          max-width: 50%;
+        }
+      }
+
+      /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+      @media screen and (max-width: 600px) {
+        .column {
+          flex: 100%;
+          max-width: 100%;
+        }
+      }
+
+      * {box-sizing: border-box}
+
+/* Container needed to position the overlay. Adjust the width as needed */
+.container {
+  position: relative;
+  width: 50%;
+  max-width: 300px;
+}
+
+/* Make the image to responsive */
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The overlay effect - lays on top of the container and over the image */
+.overlay {
+  position: absolute;
+  bottom: 0;
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.5); /* Black see-through */
+  color: #f1f1f1;
+  width: 100%;
+  transition: .5s ease;
+  opacity:0;
+  color: white;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+}
+
+/* When you mouse over the container, fade in the overlay title */
+.container:hover .overlay {
+  opacity: 1;
+}
+
+@media screen and (max-width: 430px) {
+  .header {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .myimage {
+    float: none;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+  }
+
+  .row {
+    flex-direction: column;
+    margin-left: 0;
+    padding: 0 12px;
+  }
+
+  .column1,
+  .column2 {
+    flex: 100%;
+    margin-left: 0;
+  }
+
+  video {
+    width: 100%;
+    height: auto;
+    margin: 12px 0;
+  }
+
+  UL {
+    width: 100%;
+    padding: 12px;
+  }
+
+  UL LI {
+    font-size: 16px;
+  }
+
+  h3 {
+    margin-left: 0;
+    text-align: center;
+    font-size: 20pt;
+  }
+
+  p {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: none;
+  }
+
+  .image,
+  .overlay {
+    margin-left: 0;
+    width: 100%;
+  }
+}
